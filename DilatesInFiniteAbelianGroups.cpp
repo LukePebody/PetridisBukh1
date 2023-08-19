@@ -2,6 +2,7 @@
 #include <vector>
 #include <set>
 #include <cmath>
+#include <ctime>
 #include "Counter.h"
 #include "VectorMultiSet.h"
 
@@ -131,53 +132,11 @@ double attempt(const std::vector<int>& group)
             rec2 = scr;
     }
     return rec2;
-
-//    long long ub = 1LL << size;
-//    for (long long mask = 1; mask < ub; ++mask)
-//    {
-//        std::vector<int> v;
-//        for (int j = 0; j < size; ++j)
-//            if ((mask >> j) & 1)
-//                v.push_back(j);
-//        if (v.size() == 1)
-//            continue;
-//        std::set<int> s1;
-//        std::set<int> s2;
-//        for (const int& k: v)
-//            for (const int& l : v)
-//            {
-//                int t = mul[k][l];
-//                s1.insert(t);
-//                s2.insert(mul[t][l]);
-//            }
-//        double scr = pow(double(s2.size())/s1.size(), 1.0/dims);
-//        if (scr < rec)
-//        {
-//            rec = scr;
-//            holder = std::vector<int>(group.begin(), group.end());
-//            std::cout << v.size() << " " << s1.size() << " " << s2.size() << " " << scr << std::endl;
-//        }
-//        if (scr < rec2)
-//            rec2 = scr;
-//    }
-//    return rec2;
 }
-
-//for i in range(2, sz + 1):
-//for T in combinations(elements, i):
-//s1 = len(set(tuple((a[d] + b[d]) % group[d] for d in range(dims)) for a in T for b in T))
-//s2 = len(set(tuple((a[d] + 2 * b[d]) % group[d] for d in range(dims)) for a in T for b in T))
-//scr = s2 / s1
-//scr = pow(scr, 1 / dims)
-//if scr < rec:
-//rec = scr
-//hldr = group
-//print(group, i, T, s1, s2, scr)
-
 
 int main()
 {
-    for (int n = 2; n < 100; ++n)
+    for (int n = 2; ; ++n)
     {
         std::vector<int> v;
         std::vector<std::vector<int>> groups;
