@@ -6,10 +6,13 @@
 #include "Counter.h"
 #include "VectorMultiSet.h"
 
-void print_timestamp()
+void print_timestamp(bool to_output)
 {
     std::time_t result = std::time(nullptr);
-    std::cout << std::asctime(std::localtime(&result));
+    if (to_output)
+        std::cout << std::asctime(std::localtime(&result));
+    else
+        std::cerr << std::asctime(std::localtime(&result));
 }
 
 void get_groups(int n, int k, const std::vector<int>& v, std::vector<std::vector<int>>& out) {
@@ -51,14 +54,7 @@ double attempt(const std::vector<int>& group)
                         mul[p * size + i][q * size + j] = ((p + q) % k) * size + mul[i][j];
         size *= k;
     }
-//    for (int k : group)
-//        std::cout << k << " ";
-//    std::cout << std::endl;
-//    for (int i = 0; i < size; ++i) {
-//        for (int j = 0; j < size; ++j)
-//            std::cout << mul[i][j] << " ";
-//        std::cout << std::endl;
-//    }
+
     double rec2 = 1000;
     int dims = group.size();
 
@@ -113,7 +109,7 @@ double attempt(const std::vector<int>& group)
         {
             rec = scr;
             holder = std::vector<int>(group.begin(), group.end());
-            print_timestamp();
+            print_timestamp(true);
             std::cout << v.size() << " " << v1.size() << " " << v2.size() << " " << scr << std::endl;
             for (int i = 0; i < size; ++i)
             {
@@ -143,22 +139,22 @@ int main()
         get_groups(n, 1, v, groups);
         for (const auto& group : groups)
         {
-            print_timestamp();
-            std::cout << n << ": [";
+            print_timestamp(false);
+            std::cerr << n << ": [";
             bool started = false;
             for (int k : group)
             {
                 if (started)
-                    std :: cout << ", ";
-                std :: cout << k;
+                    std :: cerr << ", ";
+                std :: cerr << k;
                 started = true;
             }
-            std::cout << "]" << " " << rec << " ";
+            std::cerr << "]" << " " << rec << " ";
             for (int k : holder)
-                std:: cout << k << " ";
-            std::cout << std::endl;
+                std:: cerr << k << " ";
+            std::cerr << std::endl;
             double ans4 = attempt(group);
-            std::cout << ans4 << std::endl;
+            std::cerr << ans4 << std::endl;
         }
     }
 }

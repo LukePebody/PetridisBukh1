@@ -3,15 +3,16 @@
 #include <ctime>
 #include "OneSet.h"
 
-void print_timestamp()
+void print_timestamp(bool to_out)
 {
     std::time_t result = std::time(nullptr);
-    std::cout << std::asctime(std::localtime(&result));
+    if (to_out)
+        std::cout << std::asctime(std::localtime(&result));
+    else
+        std::cerr << std::asctime(std::localtime(&result));
 }
 
 // Look for a set A with |A+2.A| = |A|^2, but minimising log |A+A| / |A|
-
-
 
 int main()
 {
@@ -23,8 +24,8 @@ int main()
     long long ubercount = 0;
 
     while (true) {
-        print_timestamp();
-        std::cout << k << " " << holder << std::endl;
+        print_timestamp(false);
+        std::cerr << k << " " << holder << std::endl;
         long long count = 0;
         OneSet ts(true);
         ts.toggle(k);
@@ -59,7 +60,7 @@ int main()
                 double score = lss / log(slen);
                 if (score < rec)
                 {
-                    print_timestamp();
+                    print_timestamp(true);
                     std::cout << score << std::endl;
                     rec = score;
                     holder = k;
@@ -97,7 +98,7 @@ int main()
             }
         }
         ubercount += count;
-        std::cout << count << " sets. Total = " << ubercount << "." << std::endl << std::endl;
+        std::cerr << count << " sets. Total = " << ubercount << "." << std::endl << std::endl;
         ++k;
     }
 }

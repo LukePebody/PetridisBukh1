@@ -4,10 +4,13 @@
 #include "OneSet.h"
 #include <ctime>
 
-void print_timestamp()
+void print_timestamp(bool to_out)
 {
     std::time_t result = std::time(nullptr);
-    std::cout << std::asctime(std::localtime(&result));
+    if (to_out)
+        std::cout << std::asctime(std::localtime(&result));
+    else
+        std::cerr << std::asctime(std::localtime(&result));
 }
 
 int main()
@@ -24,6 +27,7 @@ int main()
         {
             if (ts.sum_size() > ts.dilate_size())
             {
+                print_timestamp(true);
                 std::cout << "Success!" << std::endl;
                 std::cout << ts.to_string() << std::endl;
                 return 0;
@@ -31,10 +35,8 @@ int main()
             ++gens;
             if (gens % gmod == 0)
             {
-                print_timestamp();
-                std::cout << gens << " generations" << " (working on " << k << ")" << std::endl;
-//                std::cout << ts.size() << " " << ts.sum_size() << " " << ts.dilate_size() << std::endl;
-//                std::cout << ts.to_string() << std::endl;
+                print_timestamp(false);
+                std::cerr << gens << " generations" << " (working on " << k << ")" << std::endl;
                 if ((gens == gmod * 10) && (gens <= 10000000000LL))
                     gmod = gens;
             }
@@ -43,8 +45,8 @@ int main()
                 break;
             ts.toggle(j);
         }
-        print_timestamp();
-        std::cout << "Completed [" << (k + 1) << "]" << std::endl;
+        print_timestamp(false);
+        std::cerr << "Completed [" << (k + 1) << "]" << std::endl;
         ++k;
     }
 }
