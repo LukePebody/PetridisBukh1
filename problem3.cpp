@@ -14,11 +14,22 @@ void print_timestamp(bool to_out)
 
 // Look for a set A with |A+2.A| = |A|^2, but minimising log |A+A| / |A|
 
-int main()
+int main(int argc, char** argv)
 {
     //
+    int k;
+    int k_step;
+    if (argc == 3)
+    {
+        k = strtol(argv[1], nullptr, 0);
+        k_step = strtol(argv[2], nullptr, 0);
+    }
+    else
+    {
+        k = 1;
+        k_step = 1;
+    }
 
-    int k = 1;
     double rec = 3;
     int holder = -1;
     long long ubercount = 0;
@@ -27,9 +38,8 @@ int main()
         print_timestamp(false);
         std::cerr << k << " " << holder << std::endl;
         long long count = 0;
-        OneSet ts(true);
-        ts.toggle(k);
         OneSet set(true);
+        set.toggle(0);
         set.toggle(k);
         double lss = log(set.sum_size());
         double slen = set.size();
@@ -99,6 +109,6 @@ int main()
         }
         ubercount += count;
         std::cerr << count << " sets. Total = " << ubercount << "." << std::endl << std::endl;
-        ++k;
+        k += k_step;
     }
 }

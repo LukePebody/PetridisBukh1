@@ -21,10 +21,6 @@ private:
 
     }
 public:
-    VectorMultiSet clone()
-    {
-        return VectorMultiSet(_v, _count, _size);
-    }
     VectorMultiSet();
     void add(int i);
     void remove(int i);

@@ -13,14 +13,26 @@ void print_timestamp(bool to_out)
         std::cerr << std::asctime(std::localtime(&result));
 }
 
-int main()
+int main(int argc, char** argv)
 {
-    int k = 1;
+    int k;
+    int k_step;
+    if (argc == 3)
+    {
+        k = strtol(argv[1], nullptr, 0);
+        k_step = strtol(argv[2], nullptr, 0);
+    }
+    else
+    {
+        k = 1;
+        k_step = 1;
+    }
     long long gens = 0;
     long long gmod = 100000000;
 
     while (true) {
-        OneSet ts(true);
+        OneSet ts(k);
+        ts.toggle(0);
         ts.toggle(k);
         Counter c(1);
         while (true)
@@ -47,6 +59,6 @@ int main()
         }
         print_timestamp(false);
         std::cerr << "Completed [" << (k + 1) << "]" << std::endl;
-        ++k;
+        k += k_step;
     }
 }

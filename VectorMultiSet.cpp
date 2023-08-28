@@ -6,11 +6,12 @@
 #include <sstream>
 #include "VectorMultiSet.h"
 
-VectorMultiSet::VectorMultiSet() : _v({1}), _count(1), _size(1)
+VectorMultiSet::VectorMultiSet() : _v({0}), _count(0), _size(1)
 {
 }
 
 void VectorMultiSet::resize(int k) {
+//    std::cout << "Resizing from " << _size << " to " << k << std::endl;
     if (k > _size) {
         _v.resize(k);
         _size = k;
