@@ -24,6 +24,7 @@ public:
     size_t sum_size();
     size_t dilate_size();
     std::string to_string();
+    std::vector<int> as_vector() { return _contents.as_vector(); }
 };
 
 #endif //PETRIDISBUKH1_ONESET_H

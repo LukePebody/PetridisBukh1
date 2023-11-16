@@ -45,6 +45,15 @@ public:
     void remove(int i);
     void insert(int i);
     int size();
+    std::vector<int> as_vector()
+    {
+        std::vector<int> v;
+        for (auto it = begin(); it != end(); ++it)
+        {
+            v.push_back(*it);
+        }
+        return v;
+    }
 };
 
 #endif //PETRIDISBUKH1_LISTSET_H
