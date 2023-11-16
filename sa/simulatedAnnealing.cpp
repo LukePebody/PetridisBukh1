@@ -8,6 +8,7 @@
 #include <math.h>
 #include <random>
 #include <sstream>
+#include <time.h>
 #include <vector>
 
 #include "objectives.h"
