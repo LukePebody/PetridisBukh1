@@ -2,13 +2,13 @@
 // Created by Luke Pebody on 15/11/2023.
 //
 
+#include <ctime>
 #include <functional>
 #include <iostream>
 #include <map>
 #include <math.h>
 #include <random>
 #include <sstream>
-#include <time.h>
 #include <vector>
 
 #include "objectives.h"
